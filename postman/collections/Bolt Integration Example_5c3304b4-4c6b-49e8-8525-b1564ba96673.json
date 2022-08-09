@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "538b8bb0-e018-4045-b413-2337494b14d6",
+		"name": "Bolt Integration Example",
+		"description": "## About\nThe Bolt API handles [order token creation](/developers/guides/custom-cart-guides/how-to-integrate/create-bolt-order-token/), [transaction actions](/merchants/guides/dashboard/view-transactions/), and [statements](/merchants/references/financials/statements/) generated for merchants using Bolt Payments.\n\n Note: You must also reference the [Merchant API](/api-merchant) when building a custom cart integration\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Account Details",
+			"id": "15847451-037b-4538-9281-85f87dfa027a",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"description": "The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].",
+						"key": "X-Publishable-Key",
+						"value": "nulla id eiusmod"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "{{baseUrl}}/v1/account",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"account"
+					]
+				},
+				"description": "Fetch a shopper's account details to pre-fill checkout fields. This request must come from your backend for security purposes, as it requires the use of your private key to authenticate. For PCI compliance, only limited information is returned for each credit card available in the shopper’s wallet."
+			},
+			"response": [
+				{
+					"id": "aeef2276-e07a-4440-8da3-e96f72314946",
+					"name": "Account Created",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							},
+							{
+								"description": "The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].",
+								"key": "X-Publishable-Key",
+								"value": "nulla id eiusmod"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/v1/account",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"account"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"enabled": true
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n  \"addresses\": [\n    {\n      \"company\": \"Bolt\",\n      \"country\": \"United States\",\n      \"country_code\": \"US\",\n      \"email_address\": \"alan.watts@bolt.com\",\n      \"first_name\": \"Alan\",\n      \"id\": \"culpa eiusmo\",\n      \"last_name\": \"Watts\",\n      \"locality\": \"Brooklyn\",\n      \"name\": \"Alan Watts\",\n      \"phone_number\": \"1-867-5309\",\n      \"postal_code\": \"10044\",\n      \"region\": \"NY\",\n      \"region_code\": \"NY\",\n      \"street_address1\": \"888 main street\",\n      \"street_address2\": \"apt 3021\",\n      \"street_address3\": null,\n      \"street_address4\": null\n    },\n    {\n      \"company\": \"Bolt\",\n      \"country\": \"United States\",\n      \"country_code\": \"US\",\n      \"email_address\": \"alan.watts@bolt.com\",\n      \"first_name\": \"Alan\",\n      \"id\": \"occaecat Lorem nostrud\",\n      \"last_name\": \"Watts\",\n      \"locality\": \"Brooklyn\",\n      \"name\": \"Alan Watts\",\n      \"phone_number\": \"1-867-5309\",\n      \"postal_code\": \"10044\",\n      \"region\": \"NY\",\n      \"region_code\": \"NY\",\n      \"street_address1\": \"888 main street\",\n      \"street_address2\": \"apt 3021\",\n      \"street_address3\": null,\n      \"street_address4\": null\n    }\n  ],\n  \"has_bolt_account\": true,\n  \"payment_methods\": [\n    {\n      \"billing_address\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"id\": \"et dolor\",\n      \"last4\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"type\": \"card\"\n    },\n    {\n      \"billing_address\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"id\": \"consectetur commodo exercitation laboris\",\n      \"last4\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"type\": \"card\"\n    }\n  ],\n  \"profile\": {\n    \"email\": \"alan.watts@bolt.com\",\n    \"first_name\": \"Alan\",\n    \"last_name\": \"Watts\",\n    \"name\": \"Alan Watts\",\n    \"phone\": \"1-867-5309\"\n  }\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Payment Method",
+			"id": "c23579f3-ba44-467f-9a28-68521205662c",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "oauth2"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"description": "The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].",
+						"key": "X-Publishable-Key",
+						"value": "nulla id eiusmod"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"token\": \"a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0\",\n  \"last4\": \"1234\",\n  \"bin\": \"adipi\",\n  \"number\": \"labore consectetur ex ad id\",\n  \"expiration\": \"2025-11\",\n  \"postal_code\": \"10044\",\n  \"token_type\": \"bolt\",\n  \"billing_address\": {\n    \"street_address1\": \"888 main street\",\n    \"locality\": \"Brooklyn\",\n    \"region\": \"NY\",\n    \"postal_code\": \"10044\",\n    \"company\": \"Bolt\",\n    \"country\": \"United States\",\n    \"country_code\": \"US\",\n    \"default\": true,\n    \"email\": \"alan.watts@bolt.com\",\n    \"first_name\": \"Alan\",\n    \"last_name\": \"Watts\",\n    \"name\": \"Alan Watts\",\n    \"phone\": \"1-867-5309\",\n    \"region_code\": \"NY\",\n    \"street_address2\": \"apt 3021\",\n    \"street_address3\": null,\n    \"street_address4\": null\n  },\n  \"billing_address_id\": null,\n  \"cryptogram\": \"reprehenderit dolore sit est\",\n  \"eci\": \"nulla deserunt anim voluptate\",\n  \"network\": \"citiplcc\",\n  \"priority\": 1,\n  \"save\": true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/account/payment_methods",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"account",
+						"payment_methods"
+					]
+				},
+				"description": "Add a payment method to a shopper's Bolt account Wallet. For security purposes, this request must come from your backend because authentication requires the use of your private key.\n\n**Note**: Before using this API, the credit card details must be tokenized using Bolt's JavaScript library function, which is documented in [Install the Bolt Tokenizer](https://help.bolt.com/developers/references/bolt-tokenizer).\n"
+			},
+			"response": [
+				{
+					"id": "3f89dd83-8205-4865-8212-96663b1a7e5f",
+					"name": "Payment Method Added",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: oauth2",
+								"key": "Authorization",
+								"value": "<token>"
+							},
+							{
+								"description": "The publicly viewable identifier used to identify a merchant division. This key is found in the Developer > API section of the Bolt Merchant Dashboard [RECOMMENDED].",
+								"key": "X-Publishable-Key",
+								"value": "nulla id eiusmod"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"token\": \"a1B2c3D4e5F6G7H8i9J0k1L2m3N4o5P6Q7r8S9t0\",\n  \"last4\": \"1234\",\n  \"bin\": \"adipi\",\n  \"number\": \"labore consectetur ex ad id\",\n  \"expiration\": \"2025-11\",\n  \"postal_code\": \"10044\",\n  \"token_type\": \"bolt\",\n  \"billing_address\": {\n    \"street_address1\": \"888 main street\",\n    \"locality\": \"Brooklyn\",\n    \"region\": \"NY\",\n    \"postal_code\": \"10044\",\n    \"company\": \"Bolt\",\n    \"country\": \"United States\",\n    \"country_code\": \"US\",\n    \"default\": true,\n    \"email\": \"alan.watts@bolt.com\",\n    \"first_name\": \"Alan\",\n    \"last_name\": \"Watts\",\n    \"name\": \"Alan Watts\",\n    \"phone\": \"1-867-5309\",\n    \"region_code\": \"NY\",\n    \"street_address2\": \"apt 3021\",\n    \"street_address3\": null,\n    \"street_address4\": null\n  },\n  \"billing_address_id\": null,\n  \"cryptogram\": \"reprehenderit dolore sit est\",\n  \"eci\": \"nulla deserunt anim voluptate\",\n  \"network\": \"citiplcc\",\n  \"priority\": 1,\n  \"save\": true\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/account/payment_methods",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"account",
+								"payment_methods"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"enabled": true
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n  \"billing_address\": {\n    \"company\": \"Bolt\",\n    \"country\": \"United States\",\n    \"country_code\": \"US\",\n    \"email_address\": \"alan.watts@bolt.com\",\n    \"first_name\": \"Alan\",\n    \"id\": \"deserunt\",\n    \"last_name\": \"Watts\",\n    \"locality\": \"Brooklyn\",\n    \"name\": \"Alan Watts\",\n    \"phone_number\": \"1-867-5309\",\n    \"postal_code\": \"10044\",\n    \"region\": \"NY\",\n    \"region_code\": \"NY\",\n    \"street_address1\": \"888 main street\",\n    \"street_address2\": \"apt 3021\",\n    \"street_address3\": null,\n    \"street_address4\": null\n  },\n  \"id\": \"mollit officia veniam Excepteur\",\n  \"last4\": \"4021\",\n  \"type\": \"card\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Create Order Token",
+			"id": "93dbfa09-0cdc-4d55-a750-a580aa748f18",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "apikey",
+					"apikey": [
+						{
+							"key": "key",
+							"value": "X-API-Key",
+							"type": "string"
+						},
+						{
+							"key": "value",
+							"value": "<API Key>",
+							"type": "string"
+						},
+						{
+							"key": "in",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"cart\": {\n    \"currency\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"cart_url\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"display_id\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"metadata\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"order_description\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"order_reference\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"transaction_reference\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"channel\": \"mobile_app\",\n  \"create_cart_on_merchant_backend\": false,\n  \"metadata\": {\n    \"encrypted_user_id\": \"ID12345678\"\n  },\n  \"user_note\": \"Happy Birthday to my best friend in the whole world. Enjoy!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseUrl}}/v1/merchant/orders",
+					"host": [
+						"{{baseUrl}}"
+					],
+					"path": [
+						"v1",
+						"merchant",
+						"orders"
+					]
+				},
+				"description": "Make a request to this endpoint to create a Bolt order, generate a Bolt order token, and initiate the checkout process. A Bolt order token is required for Bolt orders; see Non-Bolt orders for alternative use cases."
+			},
+			"response": [
+				{
+					"id": "36f8aba4-2ad1-4b90-98ad-34b825d6b9ba",
+					"name": "Token Generation Successful",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "X-API-Key",
+								"value": "<API Key>"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cart\": {\n    \"currency\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"cart_url\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"display_id\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"metadata\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"order_description\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"order_reference\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"transaction_reference\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"channel\": \"mobile_app\",\n  \"create_cart_on_merchant_backend\": false,\n  \"metadata\": {\n    \"encrypted_user_id\": \"ID12345678\"\n  },\n  \"user_note\": \"Happy Birthday to my best friend in the whole world. Enjoy!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/merchant/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"merchant",
+								"orders"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"enabled": true
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n  \"cart\": {\n    \"billing_address\": {\n      \"company\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"country\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"country_code\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"email_address\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"first_name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"id\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"last_name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"locality\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"name\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"phone_number\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"postal_code\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"region\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"region_code\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"street_address1\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"street_address2\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"street_address3\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"street_address4\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"cart_url\": \"https://boltswagstore.com/orders/123456765432\",\n    \"currency\": {\n      \"currency\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency_symbol\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"customizations\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"delivery_options\": {\n      \"dynamicContent\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"inStorePickupOptions\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"shipToStoreOptions\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"shippingOptions\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"discount_amount\": {\n      \"amount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency_symbol\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"discounts\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"display_id\": \"displayid_100\",\n    \"items\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"merchant_order_url\": \"pariatur voluptate laboris Duis officia\",\n    \"msrp\": {\n      \"amount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency_symbol\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"order_description\": \"Order #1234567890\",\n    \"order_reference\": \"order_100\",\n    \"pickups\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"shipments\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"shipping_amount\": {\n      \"amount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency_symbol\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"subtotal_amount\": {\n      \"amount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency_symbol\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"tax_amount\": {\n      \"amount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency_symbol\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"total_amount\": {\n      \"amount\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"currency_symbol\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"transaction_reference\": \"nostrud anim\"\n  },\n  \"dynamic_content\": {\n    \"custom_fields\": [\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    ],\n    \"gift_option_view\": {\n      \"hide_gift_message\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"hide_gift_wrap\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    \"hide_apm\": [\n      \"PAYPAL\",\n      \"AMAZONPAY\"\n    ],\n    \"order_notice\": \"do\",\n    \"payment_notice\": \"dolor sint ipsum\",\n    \"shipping_info_notice\": \"dolor voluptate dolore\",\n    \"shipping_notice\": \"qui voluptate irure\"\n  },\n  \"external_data\": {\n    \"steam_id\": \"ea\"\n  },\n  \"token\": \"anim labore\",\n  \"user_note\": \"dolor veniam eiusmod\"\n}"
+				},
+				{
+					"id": "5a3db24d-3128-4466-9e59-4714341163c8",
+					"name": "Generic Error Schema",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "X-API-Key",
+								"value": "<API Key>"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cart\": {\n    \"currency\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"cart_url\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"display_id\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"metadata\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"order_description\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"order_reference\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"transaction_reference\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"channel\": \"mobile_app\",\n  \"create_cart_on_merchant_backend\": false,\n  \"metadata\": {\n    \"encrypted_user_id\": \"ID12345678\"\n  },\n  \"user_note\": \"Happy Birthday to my best friend in the whole world. Enjoy!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/merchant/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"merchant",
+								"orders"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"enabled": true
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n  \"errors\": [\n    {\n      \"code\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"message\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"code\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"message\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"result\": {\n    \"success\": false\n  }\n}"
+				},
+				{
+					"id": "d604b71f-7554-4a39-816c-989806feba1e",
+					"name": "Generic Error Schema",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "X-API-Key",
+								"value": "<API Key>"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cart\": {\n    \"currency\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"cart_url\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"display_id\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"metadata\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"order_description\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"order_reference\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"transaction_reference\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"channel\": \"mobile_app\",\n  \"create_cart_on_merchant_backend\": false,\n  \"metadata\": {\n    \"encrypted_user_id\": \"ID12345678\"\n  },\n  \"user_note\": \"Happy Birthday to my best friend in the whole world. Enjoy!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/merchant/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"merchant",
+								"orders"
+							]
+						}
+					},
+					"status": "Forbidden",
+					"code": 403,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"enabled": true
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n  \"errors\": [\n    {\n      \"code\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"message\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"code\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"message\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"result\": {\n    \"success\": false\n  }\n}"
+				},
+				{
+					"id": "edde05e1-d61f-491b-a1a7-36db3ab0bbe2",
+					"name": "Generic Error Schema",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"description": "Added as a part of security scheme: apikey",
+								"key": "X-API-Key",
+								"value": "<API Key>"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cart\": {\n    \"currency\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"cart_url\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"display_id\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"metadata\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"order_description\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"order_reference\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"transaction_reference\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    }\n  },\n  \"channel\": \"mobile_app\",\n  \"create_cart_on_merchant_backend\": false,\n  \"metadata\": {\n    \"encrypted_user_id\": \"ID12345678\"\n  },\n  \"user_note\": \"Happy Birthday to my best friend in the whole world. Enjoy!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/merchant/orders",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"merchant",
+								"orders"
+							]
+						}
+					},
+					"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+					"code": 422,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json",
+							"enabled": true
+						}
+					],
+					"cookie": [],
+					"responseTime": null,
+					"body": "{\n  \"errors\": [\n    {\n      \"code\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"message\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    },\n    {\n      \"code\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      \"message\": {\n        \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n    }\n  ],\n  \"result\": {\n    \"success\": false\n  }\n}"
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "apikey",
+		"apikey": [
+			{
+				"key": "key",
+				"value": "X-API-Key",
+				"type": "string"
+			},
+			{
+				"key": "value",
+				"value": "<API Key>",
+				"type": "string"
+			},
+			{
+				"key": "in",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"variable": [
+		{
+			"id": "dd1b024e-9a5b-49f5-9fb8-6a6c599da0ed",
+			"key": "baseUrl",
+			"value": "https://api.bolt.com"
+		}
+	]
+}

@@ -340,6 +340,20 @@
 						},
 						{
 							"name": "Get Account Details",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d60e954b-9b16-458d-ae36-c28bfbde4682",
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
 							"id": "1496edea-6b36-4506-9131-c64466663046",
 							"protocolProfileBehavior": {
 								"disableBodyPruning": true
@@ -5125,13 +5139,13 @@
 	],
 	"variable": [
 		{
-			"id": "eb39a1fa-1e05-4c03-bab5-9e256400fc87",
+			"id": "8461e66c-d29b-4536-b00a-9b49fff75e1d",
 			"key": "baseUrl",
 			"value": "https://api.bolt.com",
 			"type": "string"
 		},
 		{
-			"id": "87a525d7-832a-4d38-b826-4ec29b704f08",
+			"id": "73215e28-9d73-46b2-8ebf-f859df8320d0",
 			"key": "api_key_example",
 			"value": "your_api_key",
 			"type": "string"
